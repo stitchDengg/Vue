@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <!-- 
+        1.Vue中常见的按键别名
+            回车 => enter
+            删除 => delete
+            退出 => esc
+            空格 => space
+            换行 => tab(特殊 必须配合keydown使用)
+            上 => up
+            下 => down
+            左 => left
+            右 => right
+
+        2.Vue未提供别名的按键，可以使用键盘原始的key值去绑定，但注意要转为kebaba-case
+
+        3.系统修饰键：crtl、alt、shift、meta
+            （1）配合keyup使用：按下修饰符的同时，再按下其他按键，随后释放其他按键，事件才会被触发
+            （2）配合keydown使用：正常触发事件
+        
+            4.也可以使用keyCode去指定具体按键 不推荐
+
+            5.Vue.config.KeyCodes.自定义键名 = 键码，可以去定制键别名
+
+    -->
+    <div id="root">
+        <h1>我的学校是{{name}}</h1>
+        <!-- <input type="text" placeholder="按下回车提示输入" @keyup.enter = "showInfo"> -->
+        
+        <!-- 其他按键的事件改怎么办 -->
+        <!-- <input type="text" placeholder="按下回车提示输入" @keyup.caps-lock = "showInfo"> -->
+        <!-- 键盘修饰符也可以用连点绑定多个实现多键绑定 -->
+        <input type="text" placeholder="按下回车提示输入" @keydown.crtl.y = "showInfo">
+    </div>
+
+    <script>
+        new Vue({
+            el: '#root',
+            data: {
+                name: 'cuc'
+            },
+            methods: {
+                showInfo(e){
+                    //console.log(e.key,e.keyCode);
+                    console.log(e.target.value);
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

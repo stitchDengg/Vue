@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let number = 18;
+        let person = {
+            name:'zhangsan',
+            sex:'male'
+        }
+
+        Object.defineProperty(person,'age',{
+            //value:number,
+            //enumerable:true,  // 控制属性是否可以枚举，默认值是false
+            // writable:true,    //控制属性是否可以被修改，默认值是false
+            // configurable:true,   //控制属性是否可以被删除，默认值是false
+
+
+            // 当有人读取age属性时，get函数就可以被调用，且返回值就是age的值
+            get(){
+                console.log('有人读取age属性了');
+                return number;
+            },
+            // 当有人修改age属性时，set函数就可以被调用，且会受到修改的具体值
+            set(value){
+                console.log(`有人修改了age属性值为：${value}`);
+                number = value;
+            }
+        })
+
+        // console.log(Object.keys(person));  // ['name', 'sex']
+        
+        // for (const key in person) {
+        //     console.log('@@@',person[key]);
+        // }
+        // console.log(person);
+    </script>
+</body>
+</html>
