@@ -14,12 +14,9 @@
     <div id="root">
         <!-- 遍历数组 -->
         <h2>人员列表</h2>
-        <input type="text" placeholder="请输入名字" v-model="keyWords">
-        <button @click="sortType = 2">年龄升序</button>
-        <button @click="sortType = 1">年龄降序</button>
-        <button @click="sortType = 0">原排序</button>
+        <button @click="updateMei">更新马冬梅的信息</button>
         <ul>
-            <li v-for="(p,index) in filPersons" :key="p.id">{{p.name}}-{{p.age}}-{{p.gender}}</li>
+            <li v-for="(p,index) in persons" :key="p.id">{{p.name}}-{{p.age}}-{{p.gender}}</li>
         </ul>
     </div>
 
@@ -28,9 +25,6 @@
         const vm = new Vue({
             el: '#root',
             data: {
-                keyWords:'',
-                // 0代表原顺序 1代表降序 2代表升序
-                sortType:0,
                 persons: [
                     {
                         id: 001,
@@ -59,20 +53,19 @@
                     },
                 ],
             },
-            computed:{
-                filPersons(){
-                    let arr = this.persons.filter((p) => {
-                        return p.name.indexOf(this.keyWords) !== -1;
-                    })
-                    // 判断是否需要排序
-                    if(this.sortType){
-                        arr.sort((a,b) => {
-                            return this.sortType === 1 ? b.age-a.age : a.age-b.age;
-                        });
+            methods: {
+                updateMei(){
+                    // this.persons[0].name = "马老师";     //奏效
+                    // this.persons[0].age = 50;     //奏效
+                    // this.persons[0].gender = "男";     //奏效
+                    this.persons[0] = {
+                        id:'001',
+                        name:'马老师',
+                        age:50,
+                        gender:"男"
                     }
-                    return arr;
                 }
-            }
+            },
         })
     </script>
 </body>
