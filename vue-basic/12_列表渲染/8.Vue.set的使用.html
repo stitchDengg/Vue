@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+
+    <div id="root">
+        <!-- 遍历数组 -->
+        <h1>学校信息</h1>
+        <h2>学校名称：{{school.name}}</h2>
+        <h2>学校地址：{{school.address}}</h2>
+        <h2 v-if="school.leader">校长是：{{school.leader}}</h2>
+        <button @click="addLeader">添加一个校长属性</button>
+        <hr>
+        <h1>学生信息</h1>
+        <button @click="addSex">添加一个性别属性，默认值是男</button>
+        <h2>姓名：{{student.name}}</h2>
+        <h2 v-if="student.sex">性别：{{student.sex}}</h2>
+        <h2>年龄：真实{{student.age.rAge}}</h2>
+        <h2>年龄：对外{{student.age.sAge}}</h2>
+        <h2>朋友们</h2>
+        <ul>
+            <li v-for="(f,index) in student.friends" :key="index">{{f.name}} -- {{f.age}}</li>
+        </ul>
+    </div>
+
+    <script>
+        Vue.config.productionTip = false;
+        const vm = new Vue({
+            el: '#root',
+            data: {
+                school:{
+                    name: 'cuc',
+                    address: 'beijing',
+                },
+                student: {
+                    name: 'tom',
+                    age: {
+                        rAge: 18,
+                        sAge: 29,
+                    },
+                    friends: [
+                        { name: 'jerry', age: 35 },
+                        { name: 'tony', age: 40 },
+                    ]
+                },
+            },
+            methods: {
+                addSex() {
+                    // 这两个api可以手动添加Vue实例里的data某个对象追加属性
+                    // Vue.set(this.student,'sex','男');
+                    this.$set(this.student, 'sex', '男');
+                },
+                addLeader(){
+                    this.$set(this.school,'leader','小廖')
+                }
+            },
+        });
+
+
+    </script>
+</body>
+
+</html>
