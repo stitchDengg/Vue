@@ -30,6 +30,8 @@
         4.在Vue中修改数组某个元素一定要使用以下方法
             1.使用这些api:push,pop.shift,unshift,splice,sort,reverse
             2.Vue.set 或者 vm.$set
+
+        特别注意：Vue.set和vm.$set() 不能给vm或者vm的根数据对象添加属性
     -->
     <div id="root">
         <!-- 遍历数组 -->
@@ -41,6 +43,7 @@
         <button @click="changefriendName">修改第一个朋友的名字为张三</button><br>
         <button @click="addHobby">添加一个爱好</button><br>
         <button @click="changeHobby">修改第一个爱好为开车</button><br>
+        <button @click="removeGame">过滤掉爱好中的打游戏</button><br>
         <h2>姓名：{{student.name}}</h2>
         <h2 v-if="student.sex">性别：{{student.sex}}</h2>
         <h2>年龄{{student.age}}</h2>
@@ -87,6 +90,11 @@
                 // 使用改变数组的api
                 changeHobby(){
                     this.student.hobby.splice(0,1,"开车");
+                },
+                removeGame(){
+                    this.student.hobby = this.student.hobby.filter((v) => {
+                        return v !== '打游戏';
+                    });
                 }
             },
         });
