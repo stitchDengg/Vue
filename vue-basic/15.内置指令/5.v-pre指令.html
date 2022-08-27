@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+    <style>
+        [v-cloak]{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+        v-pre指令：
+            1.跳过了所在节点的编译过程
+            2.可利用他跳过，没有使用指令语法，没有使用插值语法的节点。会加快编译
+    -->
+
+    <div id="root">
+        <h2 v-pre>Vue其实很简单</h2>
+        <h2 v-pre>当前的n值是{{n}}</h2>
+        <button v-pre @click="nAdd">点我n+1</button>
+    </div>
+
+    <script>
+        const vm = new Vue({
+            el:'#root',
+            data:{
+                n:1,
+            },
+            methods: {
+                nAdd(){
+                    this.n ++;
+                }
+            },
+        })
+    </script>
+</body>
+</html>
