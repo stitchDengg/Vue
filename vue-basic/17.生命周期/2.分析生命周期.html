@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="root" :x="n">
+        <h2>当前的n值是：{{n}}</h2>
+        <button @click="addN">点我n+1</button>
+        <button @click="bye">点我销毁vm</button>
+    </div>
+    <script>
+        Vue.config.productionTip = false;
+
+        const vm = new Vue({
+            el: '#root',
+            data: {
+                n: 1,
+            },
+            // 不方便
+            // template: `<div><h2>当前的n值是：{{n}}
+            //     </h2><button @click="addN">点我n+1</button></div>`,
+            methods: {
+                addN() {
+                    console.log('addN');
+                    this.n++;
+                },
+                bye(){
+                    this.$destroy();
+                    console.log('bye');
+                }
+            },
+            watch:{
+                n(){
+                    console.log('n变了');
+                }
+            },
+            beforeCreate() {
+                console.log('beforeCreate'); 
+            },
+            created() {
+                console.log('created');
+            },
+            beforeMount() {
+                console.log('beforeMount');
+            },
+            mounted() {
+                console.log('mounted',this.$el instanceof HTMLElement);  //mounted true
+            },
+            beforeUpdate() {
+                console.log('beforeUpdate');
+            },
+            updated() {
+                console.log('updated');
+            },
+            beforeDestroy() {
+                console.log('beforeDestroy');
+                this.addN();
+            },
+            destroyed() {
+                console.log('destroyed');
+                console.log(this);
+            },
+            
+        })
+
+    </script>
+</body>
+
+</html>
