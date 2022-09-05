@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <!-- 
+        1.一个重要的内置关系：VueComponent.prototype.__proto__ === Vue.prototype
+        2.为什么有这个关系，让组件实例对象(vc)也能访问到Vue原型上的属性和方法
+    -->
+    <div id="root">
+        <school></school>
+    </div>
+
+    <script>
+        Vue.config.productionTip = false;
+
+        //给Vue原型添加属性
+        Vue.prototype.x = 99;
+
+        //复习原型
+      /*   // 定义一个构造函数
+        function demo(){
+            this.a = 1;
+            this.b = 2;
+        }
+        // 创建一个demo的实例对象
+        const d = new demo();
+
+        
+        console.log(demo.prototype);  //显式原型对象
+        console.log(d.__proto__);    //隐式原型对象
+
+        // 程序员通过显式原型操作原型对象，追加一个x属性，值为99
+        demo.prototype.c= 2;
+        console.log(d.c); */
+
+
+         // 学校组件
+        const school = Vue.extend({
+            name: 'school',
+            template: `<div>
+                    <h2>学校名称：{{name}}</h2>
+                    <h2>学校地址：{{address}}</h2>
+                    <button @click="showX">点我输出x</button>
+                    </div>`,
+            data() {
+                return {
+                    name: 'cuc',
+                    address: 'beijing'
+                }
+            },
+            methods: {
+                showX(){
+                    // 输出
+                    console.log(this.x);
+                }
+            },
+        })
+
+        // 创建vm
+        const vm = new Vue({
+            el:'#root',
+            data:{
+                msg:'你好',
+            },
+            components:{
+                school,
+            }
+        })
+
+        console.log(school.prototype.__proto__ === Vue.prototype);
+        console.log(school.prototype);
+    </script>
+</body>
+</html>
