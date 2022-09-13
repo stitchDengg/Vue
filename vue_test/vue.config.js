@@ -7,5 +7,14 @@ module.exports = defineConfig({
       // page 的入口
       entry: 'src/main.js',
     }
-  }
+  },
+  configureWebpack() {
+    return {
+      resolve: {
+        fallback: {
+          http: require.resolve("stream-http"),
+        },
+      },
+    }
+  },
 })
