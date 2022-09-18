@@ -11,9 +11,9 @@ Vue.config.productionTip = false;
 new Vue({
   el:'#app',
   render: h => h(App),
-  mounted(){
+  /* mounted(){
     setTimeout(() => {
       this.$destroy();
     }, 3000);
-  }
+  } */
 })
