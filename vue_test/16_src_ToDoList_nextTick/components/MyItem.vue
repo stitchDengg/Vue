@@ -46,9 +46,6 @@ export default {
     },
     // 编辑
     handleEdit(todo){
-      // 先对焦
-      this.$refs.editInput.focus();
-
       //直接添加不是响应式数据
       //todo.isEdit = true;
       if(todo.isEdit){
@@ -56,11 +53,22 @@ export default {
       }else{
         this.$set(todo,'isEdit',true);
       }
+
+      // 先对焦
+      //this.$refs.editInput.focus();  //没成功 原因是要函数回调执行完毕才会改变模板
+      /* setTimeout(() => {
+        this.$refs.editInput.focus();
+      }, 200); */
+
+      // nextTick所指定的回调会在dom节点更新完毕以后再执行
+      this.$nextTick(function(){
+        this.$refs.editInput.focus();
+      })
     },
     // 失去焦点回调，真正执行修改逻辑
     handleBlur(todo,e){
       this.todo.isEdit = false; 
-      this.$bus.$emit('updateTodo',todo.id,e.target.value)
+      this.$bus.$emit('updateTodo',todo.id,e.target.value);
     }
   }
 };

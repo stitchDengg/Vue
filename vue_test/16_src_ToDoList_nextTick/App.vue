@@ -1,6 +1,18 @@
 <template>
   <div>
-    <Test></Test>
+    <div id="root">
+      <div class="todo-container">
+        <div class="todo-wrap">
+          <MyHeader @addTodo="addTodo"></MyHeader>
+          <MyList :todos="todos"></MyList>
+          <MyFooter 
+          :allNum="allNum" 
+          :doneNum="doneNum" 
+          @deleteAll="deleteAll"
+          @checkAllTodo="checkAllTodo"></MyFooter>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
