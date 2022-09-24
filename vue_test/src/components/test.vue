@@ -1,7 +1,9 @@
 <template>
   <div>
     <button @click="isShow = !isShow ">显示/隐藏</button>
-    <h1 v-show="isShow">你好啊</h1>
+    <transition name="hello" :appear="true">
+      <h1 v-show="isShow">你好啊</h1>
+    </transition>
   </div>
 </template>
 
@@ -16,6 +18,25 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+  h1{
+    background-color: orange;
+  }
 
+  .hello-enter-active{
+    animation: denghao 1s ease;
+  }
+
+  .hello-leave-active{
+    animation: denghao 1s reverse;
+  }
+
+  @keyframes denghao {
+    from{
+      transform: translateX(-100%);
+    }
+    to{
+      transform: translateX(0px);
+    }
+  }
 </style>
