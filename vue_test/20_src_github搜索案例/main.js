@@ -3,15 +3,12 @@ import Vue from 'vue';
 // 引入App
 import App from './App.vue';
 
-// 引入vue-resource
-import vueResource from 'vue-resource';
-
 // 关闭Vue生产提示
 Vue.config.productionTip = false;
 
-// 引入插件
-Vue.use(vueResource);
-
+// 创建公共组件实例挂载在Vue原型上
+/* const demo = Vue.extend({});
+Vue.prototype.x = new demo(); */
 
 // 创建vm
 new Vue({
