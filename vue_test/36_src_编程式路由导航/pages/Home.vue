@@ -21,10 +21,7 @@
             >
           </li>
         </ul>
-        <!-- include的值代表需要缓存的组件名 -->
-        <keep-alive include="News">
-          <router-view></router-view>
-        </keep-alive>
+        <router-view></router-view>
       </div>
     </div>
 </template>
