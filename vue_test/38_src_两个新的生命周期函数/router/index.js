@@ -6,27 +6,22 @@ import News from '../pages/News.vue';
 import Message from '../pages/Messgae.vue';
 import Detail from '../pages/Detail.vue';
 // 创建并暴露一个路由器
-const router =  new VueRouter({
+export default new VueRouter({
   routes:[
-    // 跳转到about组件
     {
       name:'guanyu',
       path:'/about',
       component:About
     },
-    // 跳转到home组件
     {
-      name:'shouye',
       path:'/home',
       component:Home,
       children:[
         {
-          name:'xinwen',
           path:'news',
           component:News,
         },
         {
-          name:'xiaoxi',
           path:'message',
           component:Message,
           children:[
@@ -55,22 +50,3 @@ const router =  new VueRouter({
     },
   ]
 })
-
-// 全局前置路由守卫---每次路由切换之前被调用，初始化的时候被调用
-router.beforeEach((to, from, next) => {
-  // to and from are both route objects. must call `next`.
-  console.log('@',to,from);
-  if(to.name === 'xinwen' || to.name === 'xiaoxi'){
-    // 验证是否符合条件通过路由守卫
-  if(localStorage.getItem('school') === 'cuc'){
-    // 通过路由
-    next();
-  }else{
-    alert("学校名无权限查看")
-  }
-  }else{
-    next();
-  }
-})
-
-export default router;
